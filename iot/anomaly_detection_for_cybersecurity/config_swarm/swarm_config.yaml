@@ -1,0 +1,147 @@
+common_args:
+  training_type: "swarm_simulation"
+  random_seed: 42
+
+data_args:
+  dataset: "N-BaIoT"
+  data_cache_dir: "./data"
+  partition_method: "hetero"
+  partition_alpha: 0.5
+
+model_args:
+  model: "autoencoder"
+  model_file_cache_folder: "./model_file_cache"
+  global_model_file_path: "./model_file_cache/swarm_model.pt"
+
+train_args:
+  client_num_in_total: 9
+  client_num_per_round: 9
+  comm_round: 15
+  epochs: 3
+  batch_size: 32
+  client_optimizer: "adam"
+  learning_rate: 0.001
+  weight_decay: 0.0001
+
+validation_args:
+  frequency_of_the_test: 3
+
+device_args:
+  worker_num: 9
+  using_gpu: false
+  gpu_id: 0
+
+# Swarm Learning Specific Configuration
+swarm_args:
+  # Blockchain Configuration
+  blockchain_difficulty: 2                    # Mining difficulty (number of leading zeros)
+  consensus_threshold: 0.51                   # Minimum consensus percentage required
+  mining_reward: 1.0                         # Reward for mining blocks
+  
+  # Network Configuration
+  host: "localhost"                           # Host address for nodes
+  port: 8000                                 # Base port (each node gets port + node_id)
+  consensus_wait_time: 15                    # Time to wait for consensus (seconds)
+  round_wait_time: 5                         # Time between rounds (seconds)
+  peer_timeout: 300                          # Peer connection timeout (seconds)
+  
+  # Evaluation Configuration
+  evaluation_frequency: 3                    # Evaluate every N rounds
+  
+  # Bootstrap peers for initial network discovery
+  bootstrap_peers:
+    - host: "localhost"
+      port: 8001
+    - host: "localhost"
+      port: 8002
+    - host: "localhost"
+      port: 8003
+  
+  # Reputation and Trust Configuration
+  initial_node_stake: 1.0                    # Initial stake for new nodes
+  reputation_decay: 0.95                     # Reputation decay factor
+  performance_weight: 0.4                    # Weight for performance in consensus
+  stake_weight: 0.3                          # Weight for stake in consensus
+  data_size_weight: 0.2                      # Weight for data size in consensus
+  reputation_weight: 0.1                     # Weight for reputation in consensus
+  
+  # Model Aggregation Configuration
+  aggregation_method: "weighted_average"      # Model aggregation method
+  min_consensus_nodes: 3                     # Minimum nodes required for consensus
+  max_consensus_nodes: 7                     # Maximum nodes to include in consensus
+  
+  # Security Configuration
+  enable_model_encryption: false             # Enable model weight encryption
+  enable_differential_privacy: false         # Enable differential privacy
+  privacy_epsilon: 1.0                      # Privacy budget for DP
+  
+  # Performance Monitoring
+  enable_performance_monitoring: true        # Enable detailed performance monitoring
+  log_blockchain_stats: true                # Log blockchain statistics
+  log_network_topology: true                # Log network topology changes
+
+tracking_args:
+  log_file_dir: ./log/swarm
+  enable_wandb: false
+  wandb_key: ""
+  wandb_project: "swarm_iot_anomaly_detection"
+  wandb_name: "swarm_learning_autoencoder"
+
+# Device-specific IoT configuration
+iot_devices:
+  - name: "Danmini_Doorbell"
+    node_id: "node_1"
+    device_type: "doorbell"
+    trust_level: "medium"
+  - name: "Ecobee_Thermostat" 
+    node_id: "node_2"
+    device_type: "thermostat"
+    trust_level: "high"
+  - name: "Ennio_Doorbell"
+    node_id: "node_3"
+    device_type: "doorbell"
+    trust_level: "medium"
+  - name: "Philips_B120N10_Baby_Monitor"
+    node_id: "node_4"
+    device_type: "monitor"
+    trust_level: "high"
+  - name: "Provision_PT_737E_Security_Camera"
+    node_id: "node_5"
+    device_type: "camera"
+    trust_level: "high"
+  - name: "Provision_PT_838_Security_Camera"
+    node_id: "node_6"
+    device_type: "camera"
+    trust_level: "high"
+  - name: "Samsung_SNH_1011_N_Webcam"
+    node_id: "node_7"
+    device_type: "webcam"
+    trust_level: "medium"
+  - name: "SimpleHome_XCS7_1002_WHT_Security_Camera"
+    node_id: "node_8"
+    device_type: "camera"
+    trust_level: "medium"
+  - name: "SimpleHome_XCS7_1003_WHT_Security_Camera"
+    node_id: "node_9"
+    device_type: "camera"
+    trust_level: "medium"
+
+# Anomaly Detection Specific Configuration
+anomaly_detection:
+  threshold_method: "statistical"            # Threshold calculation method
+  threshold_multiplier: 3.0                 # Multiplier for statistical threshold
+  min_training_samples: 1000                # Minimum samples for training
+  evaluation_metrics:
+    - "detection_rate"
+    - "false_positive_rate"
+    - "precision"
+    - "recall"
+    - "f1_score"
+  
+  # Attack types to detect
+  attack_types:
+    - "mirai"
+    - "gafgyt"
+    - "scan"
+    - "tcp_flood"
+    - "udp_flood"
