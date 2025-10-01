@@ -1,0 +1,50 @@
+graph TB
+    subgraph "Federated Learning (Original)"
+        FS[Central Server]
+        FC1[IoT Device 1<br/>Doorbell]
+        FC2[IoT Device 2<br/>Thermostat] 
+        FC3[IoT Device 3<br/>Camera]
+        FC4[IoT Device 4<br/>Monitor]
+        
+        FC1 -->|Model Updates| FS
+        FC2 -->|Model Updates| FS
+        FC3 -->|Model Updates| FS
+        FC4 -->|Model Updates| FS
+        
+        FS -->|Global Model| FC1
+        FS -->|Global Model| FC2
+        FS -->|Global Model| FC3
+        FS -->|Global Model| FC4
+    end
+    
+    subgraph "Swarm Learning (New Implementation)"
+        BC[Blockchain Ledger<br/>🔗]
+        SC1[Swarm Node 1<br/>Doorbell + Blockchain]
+        SC2[Swarm Node 2<br/>Thermostat + Blockchain]
+        SC3[Swarm Node 3<br/>Camera + Blockchain]
+        SC4[Swarm Node 4<br/>Monitor + Blockchain]
+        
+        SC1 <-->|P2P Communication| SC2
+        SC2 <-->|P2P Communication| SC3
+        SC3 <-->|P2P Communication| SC4
+        SC4 <-->|P2P Communication| SC1
+        SC1 <-->|P2P Communication| SC3
+        SC2 <-->|P2P Communication| SC4
+        
+        SC1 -->|Transactions| BC
+        SC2 -->|Transactions| BC
+        SC3 -->|Transactions| BC
+        SC4 -->|Transactions| BC
+        
+        BC -->|Consensus Model| SC1
+        BC -->|Consensus Model| SC2
+        BC -->|Consensus Model| SC3
+        BC -->|Consensus Model| SC4
+    end
+    
+    subgraph "Key Differences"
+        D1["❌ Single Point of Failure<br/>✅ Fully Decentralized"]
+        D2["❌ Central Trust Required<br/>✅ Distributed Trust"]
+        D3["❌ Limited Transparency<br/>✅ Full Transparency"]
+        D4["❌ Simple Aggregation<br/>✅ Consensus-based Aggregation"]
+    end

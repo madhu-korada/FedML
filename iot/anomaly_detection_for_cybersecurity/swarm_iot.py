@@ -81,13 +81,15 @@ class SwarmLearningRunner:
             port=self.args.port + int(self.args.node_id.split('_')[-1]),  # Unique port per node
             blockchain=self.blockchain
         )
-        
+        self.logger.info(f"Swarm node initialized with ID: {self.args.node_id}")
         # 3. Load data
         self.dataset, output_dim = load_data(self.args)
-        
+        self.logger.info(f"Data loaded successfully")
+
         # 4. Initialize model
         self.model = AutoEncoder(output_dim)
-        
+        self.logger.info(f"Model initialized successfully")
+
         # 5. Initialize trainer
         self.trainer = SwarmTrainer(
             model=self.model,
@@ -95,7 +97,7 @@ class SwarmLearningRunner:
             device=self.device,
             args=self.args
         )
-        
+        self.logger.info(f"Trainer initialized successfully")
         self.logger.info("All components initialized successfully")
     
     def start_swarm_node(self):

@@ -118,8 +118,10 @@ echo ""
 
 # Start coordinator node (rank 0) first
 echo -e "${BLUE}Starting Swarm Learning Simulation...${NC}"
-start_swarm_node "coordinator" 0 8000
+start_swarm_node "coordinator_0" 0 8000
 COORDINATOR_PID=$!
+
+echo "Coordinator PID: $COORDINATOR_PID"
 
 # Wait for coordinator to initialize
 echo "Waiting for coordinator to initialize..."
@@ -133,8 +135,10 @@ for i in $(seq 1 "$WORKER_NUM"); do
     WORKER_PIDS+=($!)
     
     # Stagger node startup to avoid network congestion
-    sleep 2
+    sleep 4
 done
+
+sleep 10
 
 echo -e "${GREEN}All nodes started. Running swarm learning...${NC}"
 echo "Monitor progress with: tail -f $LOG_DIR/*.log"

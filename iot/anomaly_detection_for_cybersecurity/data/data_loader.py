@@ -97,6 +97,8 @@ def load_data(args):
             )
             train_data_local_num_dict[i] = len(train_data_local_dict[i])
             train_data_num += train_data_local_num_dict[i]
+            logging.info(f"Train data local num dict: {train_data_local_num_dict}")
+            logging.info(f"Train data num: {train_data_num}")
 
     else:
         device_name = device_list[args.rank - 1]

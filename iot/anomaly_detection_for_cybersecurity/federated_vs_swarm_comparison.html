@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Federated Learning vs Swarm Learning Comparison</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        .diagram-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .description {
+            background-color: #f5f5f5;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Federated Learning vs Swarm Learning Architecture Comparison</h1>
+    
+    <div class="description">
+        <h3>Architecture Comparison</h3>
+        <p>This diagram illustrates the key architectural differences between traditional Federated Learning 
+        and the new Swarm Learning implementation for IoT anomaly detection.</p>
+        
+        <h4>Key Advantages of Swarm Learning:</h4>
+        <ul>
+            <li><strong>Decentralized:</strong> No single point of failure</li>
+            <li><strong>Transparent:</strong> All decisions recorded on blockchain</li>
+            <li><strong>Trustless:</strong> No need to trust a central authority</li>
+            <li><strong>Consensus-based:</strong> Democratic model selection</li>
+        </ul>
+    </div>
+    
+    <div class="diagram-container">
+        <div class="mermaid">
+graph TB
+    subgraph "Federated Learning (Original)"
+        FS[Central Server]
+        FC1[IoT Device 1<br/>Doorbell]
+        FC2[IoT Device 2<br/>Thermostat] 
+        FC3[IoT Device 3<br/>Camera]
+        FC4[IoT Device 4<br/>Monitor]
+        
+        FC1 -->|Model Updates| FS
+        FC2 -->|Model Updates| FS
+        FC3 -->|Model Updates| FS
+        FC4 -->|Model Updates| FS
+        
+        FS -->|Global Model| FC1
+        FS -->|Global Model| FC2
+        FS -->|Global Model| FC3
+        FS -->|Global Model| FC4
+    end
+    
+    subgraph "Swarm Learning (New Implementation)"
+        BC[Blockchain Ledger<br/>🔗]
+        SC1[Swarm Node 1<br/>Doorbell + Blockchain]
+        SC2[Swarm Node 2<br/>Thermostat + Blockchain]
+        SC3[Swarm Node 3<br/>Camera + Blockchain]
+        SC4[Swarm Node 4<br/>Monitor + Blockchain]
+        
+        SC1 <-->|P2P Communication| SC2
+        SC2 <-->|P2P Communication| SC3
+        SC3 <-->|P2P Communication| SC4
+        SC4 <-->|P2P Communication| SC1
+        SC1 <-->|P2P Communication| SC3
+        SC2 <-->|P2P Communication| SC4
+        
+        SC1 -->|Transactions| BC
+        SC2 -->|Transactions| BC
+        SC3 -->|Transactions| BC
+        SC4 -->|Transactions| BC
+        
+        BC -->|Consensus Model| SC1
+        BC -->|Consensus Model| SC2
+        BC -->|Consensus Model| SC3
+        BC -->|Consensus Model| SC4
+    end
+    
+    subgraph "Key Differences"
+        D1["❌ Single Point of Failure<br/>✅ Fully Decentralized"]
+        D2["❌ Central Trust Required<br/>✅ Distributed Trust"]
+        D3["❌ Limited Transparency<br/>✅ Full Transparency"]
+        D4["❌ Simple Aggregation<br/>✅ Consensus-based Aggregation"]
+    end
+        </div>
+    </div>
+    
+    <div class="description">
+        <h4>Implementation Details:</h4>
+        <ul>
+            <li><strong>Blockchain Ledger:</strong> Records all model updates and transactions</li>
+            <li><strong>P2P Communication:</strong> Direct node-to-node communication</li>
+            <li><strong>Consensus Mechanism:</strong> Weighted voting based on performance and reputation</li>
+            <li><strong>Reputation System:</strong> Tracks node contribution quality over time</li>
+        </ul>
+    </div>
+
+    <script>
+        mermaid.initialize({ startOnLoad: true, theme: 'neutral' });
+    </script>
+</body>
+</html>
